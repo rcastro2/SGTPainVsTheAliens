@@ -64,6 +64,14 @@ function update() {
 		score += 100;
 		scoreText.text = "Score: " + score;
 	}
+	if(alien1.body.x + alien1.body.width < 0){
+		alien1.body.x = game.world.width;
+		alien1.body.y = Math.random() * game.world.height;
+	}
+	if(diamond.body.x + diamond.body.width < 0){
+		diamond.body.x = game.world.width;
+		diamond.body.y = Math.random() * game.world.height;
+	}
 
 }
 function controlDude(){
