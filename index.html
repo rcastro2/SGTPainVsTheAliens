@@ -25,10 +25,12 @@ function preload() {
 	game.load.image('bk','assets/bk1.png');
 	game.load.image('dude','assets/dude.png');
 	game.load.image('alien1','assets/alien1.png');
+	game.load.image('diamond','assets/diamond.png');
 
 
 }
 function create() {
+
 	bk1 = game.add.sprite(0,0,'bk');
 	bk2 = game.add.sprite(bk1.width,0,'bk');
 
@@ -41,6 +43,10 @@ function create() {
 	game.physics.arcade.enable(alien1);
 	alien1.body.velocity.x = -100;
 
+	diamond = game.add.sprite(game.world.width,Math.random() * game.world.height,'diamond');
+	game.physics.arcade.enable(diamond);
+	diamond.body.velocity.x = -200;
+
 	keys = game.input.keyboard.createCursorKeys();
 }
 
@@ -49,6 +55,10 @@ function update() {
 	controlDude();
 	if(game.physics.arcade.overlap(dude, alien1)){
 		dude.kill();
+	}
+	if(game.physics.arcade.overlap(dude, diamond)){
+		diamond.body.x = game.world.width;
+		diamond.body.y = Math.random() * game.world.height;
 	}
 
 }
