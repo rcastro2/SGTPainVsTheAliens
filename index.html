@@ -47,6 +47,9 @@ function create() {
 function update() {
 	scrollBK(2);
 	controlDude();
+	if(game.physics.arcade.overlap(dude, alien1)){
+		dude.kill();
+	}
 
 }
 function controlDude(){
