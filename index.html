@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Phaser - Making your first game, part 3</title>
+	<script type="text/javascript" src="js/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+        canvas{
+            margin: 0 auto;
+            box-shadow:5px 5px 5px grey;
+            cursor:none;
+        }
+    </style>
+</head>
+<body>
+<!--https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=58e42380169b17585c0a25d4de31e8ff
+    http://image.tmdb.org/t/p/w300/6bCplVkhowCjTHXWv49UjRPn0eK.jpg
+-->
+<script type="text/javascript">
+
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var bk,ship, goodies;
+var cursors;
+function preload() {
+
+    game.load.image('ship', 'assets/ship.png');
+    game.load.image('diamond', 'assets/diamond.png');
+    game.load.image('star', 'assets/star.png');
+		game.load.image('aid', 'assets/firstaid.png');
+	  game.load.image('bk','assets/bk1.png');
+    game.load.spritesheet('field', 'assets/spritesheet.png', 200, 200);
+
+}
+function create() {
+	bk = game.add.sprite(0,0,'bk');
+	starsheet = game.add.sprite(0, 0, 'field');
+	starsheet.animations.add('full', [0, 1, 2, 3,4], 10, true);
+	ship = game.add.sprite(game.world.centerX,game.world.centerY,'ship');
+	game.physics.arcade.enable(ship);
+	goodies = game.add.group();
+  var shapes = ['star','diamond','aid']
+	for (var i = 0; i < 20; i++)
+	{
+		  var option = Math.floor(Math.random()*3);
+ 		  var obj = goodies.create(game.world.width + Math.random() * game.world.width, Math.random() * game.world.height, shapes[option]);
+      obj.name = shapes[option];
+			game.physics.arcade.enable(obj);
+			obj.body.velocity.x = -Math.random() * 50 - 50;
+	}
+  cursors = game.input.keyboard.createCursorKeys();
+}
+
+function update() {
+	starsheet.animations.play('full');
+	if(game.physics.arcade.overlap(ship, goodies,hit)){
+		console.log("hit");
+	}
+	ship.body.velocity.y = 0;
+	ship.body.velocity.x = 0;
+	speed = 200;
+	if (cursors.left.isDown)
+	{
+			ship.body.velocity.x = -speed;
+	}
+	else if (cursors.right.isDown)
+	{
+			ship.body.velocity.x = speed;
+	}
+
+	if (cursors.up.isDown)
+	{
+			ship.body.velocity.y = -speed;
+	}
+	else if (cursors.down.isDown)
+	{
+			ship.body.velocity.y = speed;
+	}
+
+}
+function hit(ship,obj){
+	if(obj.name == 'star')
+		obj.kill();
+}
+</script>
+
+</body>
+</html>
