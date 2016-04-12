@@ -24,15 +24,22 @@ var game = new Phaser.Game(800, 550, Phaser.AUTO, '', { preload: preload, create
 function preload() {
 	game.load.image('bk','assets/bk1.png');
 	game.load.image('dude','assets/dude.png');
+	game.load.image('alien1','assets/alien1.png');
 
 
 }
 function create() {
 	bk1 = game.add.sprite(0,0,'bk');
 	bk2 = game.add.sprite(bk1.width,0,'bk');
+
 	dude = game.add.sprite(0,0,'dude');
 	dude.scale.setTo(0.35,0.35);
-	game.physics.arcade.enable(dude);
+  game.physics.arcade.enable(dude);
+
+	alien1 = game.add.sprite(game.world.width,game.world.centerY,'alien1');
+  alien1.scale.setTo(0.35,0.35);
+	game.physics.arcade.enable(alien1);
+	alien1.body.velocity.x = -100;
 
 	keys = game.input.keyboard.createCursorKeys();
 }
