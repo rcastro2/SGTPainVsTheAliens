@@ -23,12 +23,17 @@ var game = new Phaser.Game(800, 550, Phaser.AUTO, '', { preload: preload, create
 
 function preload() {
 	game.load.image('bk','assets/bk1.png');
+	game.load.image('dude','assets/dude.png');
 
 
 }
 function create() {
 	bk1 = game.add.sprite(0,0,'bk');
 	bk2 = game.add.sprite(bk1.width,0,'bk');
+	dude = game.add.sprite(0,0,'dude');
+	dude.scale.setTo(0.3,0.3);
+	//dude.scale.x = 0.5;
+  //dude.scale.y = 0.5;
 }
 
 function update() {
