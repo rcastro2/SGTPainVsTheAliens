@@ -6,7 +6,7 @@ var gamescreen = function(game){
 
 gamescreen.prototype = {
 		preload:function () {
-			this.game.load.image('bk','assets/bk1.png');
+			this.game.load.image('bk','assets/bk3.png');
 			this.game.load.image('dude','assets/dude.png');
 			this.game.load.image('alien1','assets/alien1.png');
 			this.game.load.image('diamond','assets/diamond.png');
@@ -19,6 +19,7 @@ gamescreen.prototype = {
 			dude = this.game.add.sprite(0,0,'dude');
 			dude.scale.setTo(0.35,0.35);
 		  this.game.physics.arcade.enable(dude);
+			dude.body.collideWorldBounds = true;
 
 			alien1 =this.game.add.sprite(this.game.world.width,Math.random() * this.game.world.height,'alien1');
 		  alien1.scale.setTo(0.35,0.35);

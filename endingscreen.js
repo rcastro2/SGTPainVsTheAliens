@@ -6,7 +6,7 @@ var endingscreen = function(game){
 
 endingscreen.prototype = {
 		preload:function () {
-			this.game.load.image('bk','assets/bk1.png');
+			this.game.load.image('bk','assets/bk3.png');
 			this.game.load.image('gameover','assets/gameover.png');
 			this.game.load.image('play','assets/play.png');
 			this.game.load.image('pointer','assets/pointer.png');
