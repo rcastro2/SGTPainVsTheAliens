@@ -2,109 +2,32 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>Phaser - Making your first game, part 3</title>
-	<script type="text/javascript" src="js/phaser.min.js"></script>
-    <style type="text/css">
-        body {
-            margin: 0;
-        }
-        canvas{
-            margin: 0 auto;
-            box-shadow:5px 5px 5px grey;
-            cursor:none;
-        }
-    </style>
+	<title>Hero's Journey</title>
+	<style type="text/css">
+			body {
+					margin: 0;
+			}
+			canvas{
+					margin: 0 auto;
+					box-shadow:5px 5px 5px grey;
+					cursor:none;
+			}
+	</style>
+	<script src="js/phaser.min.js"></script>
+	<script src="splashscreen.js"></script>
+	<script src="gamescreen.js"></script>
+	<script src="endingscreen.js"></script>
 </head>
 <body>
 
 <script type="text/javascript">
-
-var game = new Phaser.Game(800, 550, Phaser.AUTO, '', { preload: preload, create: create, update: update });
-
-function preload() {
-	game.load.image('bk','assets/bk1.png');
-	game.load.image('dude','assets/dude.png');
-	game.load.image('alien1','assets/alien1.png');
-	game.load.image('diamond','assets/diamond.png');
-
-
-}
-function create() {
-
-	bk1 = game.add.sprite(0,0,'bk');
-	bk2 = game.add.sprite(bk1.width,0,'bk');
-
-	dude = game.add.sprite(0,0,'dude');
-	dude.scale.setTo(0.35,0.35);
-  game.physics.arcade.enable(dude);
-
-	alien1 = game.add.sprite(game.world.width,game.world.centerY,'alien1');
-  alien1.scale.setTo(0.35,0.35);
-	game.physics.arcade.enable(alien1);
-	alien1.body.velocity.x = -100;
-
-	diamond = game.add.sprite(game.world.width,Math.random() * game.world.height,'diamond');
-	game.physics.arcade.enable(diamond);
-	diamond.body.velocity.x = -200;
-
-	keys = game.input.keyboard.createCursorKeys();
-	score = 0;
-	scoreText = game.add.text(10, 10, 'Score: 0', { fontSize: '32px', fill: '#000' });
-}
-
-function update() {
-	scrollBK(2);
-	controlDude();
-	if(game.physics.arcade.overlap(dude, alien1)){
-		dude.kill();
-	}
-	if(game.physics.arcade.overlap(dude, diamond)){
-		diamond.body.x = game.world.width;
-		diamond.body.y = Math.random() * game.world.height;
-		score += 100;
-		scoreText.text = "Score: " + score;
-	}
-	if(alien1.body.x + alien1.body.width < 0){
-		alien1.body.x = game.world.width;
-		alien1.body.y = Math.random() * game.world.height;
-	}
-	if(diamond.body.x + diamond.body.width < 0){
-		diamond.body.x = game.world.width;
-		diamond.body.y = Math.random() * game.world.height;
-	}
-
-}
-function controlDude(){
-	speed = 150;
-	if (keys.left.isDown)
-	{
-			dude.body.velocity.x = -speed;
-	}
-	else if (keys.right.isDown)
-	{
-			dude.body.velocity.x = speed;
-	}
-
-	if (keys.up.isDown)
-	{
-			dude.body.velocity.y = -speed;
-	}
-	else if (keys.down.isDown)
-	{
-			dude.body.velocity.y = speed;
-	}
-}
-function scrollBK(amt){
-	bk1.x -= amt;
-	bk2.x -= amt;
-	if(bk1.x + bk1.width < 0){
-				bk1.x = bk2.x + bk2.width;
-	}
-	if(bk2.x + bk2.width < 0){
-				bk2.x = bk1.x + bk1.width;
-	}
-}
-
+(function(){
+		var game = new Phaser.Game(800, 550, Phaser.AUTO, "game");
+		game.state.add("splashscreen",splashscreen);
+		game.state.add("gamescreen",gamescreen);
+		game.state.add("endingscreen",endingscreen);
+		game.state.start("splashscreen");
+})();
 </script>
 
 </body>
