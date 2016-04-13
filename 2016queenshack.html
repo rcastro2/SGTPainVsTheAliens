@@ -50,6 +50,24 @@ function Sprite(image,x,y){
 	 		      },
 	 		      configurable: false
 	 		  });
+    Object.defineProperty(this, "vx", {
+    		    get: function() {
+    		      return this.sprite.body.velocity.x;
+    		    },
+    		    set: function(x) {
+    		      this.sprite.body.velocity.x = x;
+    		    },
+    		    configurable: false
+    		});
+    Object.defineProperty(this, "vy", {
+    	 		  get: function() {
+    	 		    return this.sprite.body.velocity.y;
+    	 		  },
+    	 		  set: function(y) {
+    	 		    this.sprite.body.velocity.y = y;
+    	 		  },
+    	 		  configurable: false
+    	 	});
 		this.collidedWith = function(obj){
 			  return game.physics.arcade.overlap(this.sprite, obj.sprite)
 		}
@@ -59,7 +77,7 @@ function Sprite(image,x,y){
 
 }
 function create() {
-
+  keys = game.input.keyboard.createCursorKeys();
 	bk1 = new Sprite('bk');
 	//bk2 = game.add.sprite(bk1.width,0,'bk');
 
@@ -83,6 +101,7 @@ function create() {
 }
 
 function update() {
+  controlDude();
   /*
 	scrollBK(2);
 	controlDude();
@@ -105,27 +124,28 @@ function update() {
 	}
   */
 }
-/*
+
 function controlDude(){
-	speed = 150;
+	speed = 100;
 	if (keys.left.isDown)
 	{
-			dude.body.velocity.x = -speed;
+			dude.vx = -speed;
 	}
 	else if (keys.right.isDown)
 	{
-			dude.body.velocity.x = speed;
+			dude.vx = speed;
 	}
 
 	if (keys.up.isDown)
 	{
-			dude.body.velocity.y = -speed;
+			dude.vy = -speed;
 	}
 	else if (keys.down.isDown)
 	{
-			dude.body.velocity.y = speed;
+			dude.vy = speed;
 	}
 }
+/*
 function scrollBK(amt){
 	bk1.x -= amt;
 	bk2.x -= amt;
