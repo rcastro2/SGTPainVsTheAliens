@@ -35,8 +35,12 @@ function create() {
 	dude = new Sprite('dude');
 	dude.resizeBy(35);
 
-  diamond = new Sprite('diamond',world.width,world.centerY)
+  diamond = new Sprite('diamond',world.width,world.randomY)
 	diamond.vx = -100;
+
+	alien = new Sprite('alien1',world.width,world.randomY)
+	alien.resizeBy(35)
+	alien.vx = -120
 
 	score = 0;
 	scoreText = new Text(10,10);
