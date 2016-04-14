@@ -57,11 +57,17 @@ function update() {
 		score += 100;
 		scoreText.text = "Score: " + score;
 	}
-  /*
-	if(game.physics.arcade.overlap(dude, alien1)){
-		dude.kill();
+  if(diamond.isOffScreen('left')){
+		diamond.x = world.width;
+		diamond.y = world.randomY;
+		diamond.vx -= 50;
 	}
-
+	if(alien.isOffScreen('left')){
+		alien.x = world.width;
+		alien.y = world.randomY;
+		alien.vx -= 100;
+	}
+/*
 	if(alien1.body.x + alien1.body.width < 0){
 		alien1.body.x = game.world.width;
 		alien1.body.y = Math.random() * game.world.height;

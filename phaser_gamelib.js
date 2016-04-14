@@ -56,6 +56,14 @@ function Sprite(image,x,y){
     this.resizeBy = function(amt){
       this.sprite.scale.setTo(amt/100,amt/100);
     }
+		this.isOffScreen =  function(side){
+			if(side.toUpperCase() == "LEFT" && this.sprite.body.x + this.sprite.width < 0){
+				return true;
+			}
+
+			return false;
+
+		}
 
 }
 function Text(x,y){
