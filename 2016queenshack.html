@@ -4,6 +4,7 @@
 	<meta charset="UTF-8" />
 	<title>Phaser - Making your first game, part 3</title>
 	<script type="text/javascript" src="js/phaser.min.js"></script>
+	<script type="text/javascript" src="phaser_gamelib.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -22,123 +23,41 @@
 var game = new Phaser.Game(800, 550, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 var keys;
 function preload() {
-	game.load.image('bk','assets/bk1.png');
+	game.load.image('bk','assets/bk2.png');
 	game.load.image('dude','assets/dude.png');
 	game.load.image('alien1','assets/alien1.png');
 	game.load.image('diamond','assets/diamond.png');
-
-
-}
-function Sprite(image,x,y){
-		this.sprite = game.add.sprite(x || 0, y || 0, image);
-    game.physics.arcade.enable(this.sprite)
-		Object.defineProperty(this, "x", {
-		      get: function() {
-		        return this.sprite.body.x;
-		      },
-		      set: function(x) {
-		        this.sprite.body.x = x;
-		      },
-		      configurable: false
-		   });
-	  Object.defineProperty(this, "y", {
-	 		      get: function() {
-	 		        return this.sprite.body.y;
-	 		      },
-	 		      set: function(y) {
-	 		        this.sprite.body.y = y;
-	 		      },
-	 		      configurable: false
-	 		  });
-	    Object.defineProperty(this, "angle", {
-	 		      get: function() {
-	 		        return this.sprite.angle;
-	 		      },
-	 		      set: function(y) {
-	 		        this.sprite.angle = y;
-	 		      },
-	 		      configurable: false
-	 		  });
-    Object.defineProperty(this, "vx", {
-    		    get: function() {
-    		      return this.sprite.body.velocity.x;
-    		    },
-    		    set: function(x) {
-    		      this.sprite.body.velocity.x = x;
-    		    },
-    		    configurable: false
-    		});
-    Object.defineProperty(this, "vy", {
-    	 		  get: function() {
-    	 		    return this.sprite.body.velocity.y;
-    	 		  },
-    	 		  set: function(y) {
-    	 		    this.sprite.body.velocity.y = y;
-    	 		  },
-    	 		  configurable: false
-    	 	});
-		this.collidedWith = function(obj){
-			  return game.physics.arcade.overlap(this.sprite, obj.sprite)
-		}
-    this.resizeBy = function(amt){
-      this.sprite.scale.setTo(amt/100,amt/100);
-    }
-
-}
-function Background(image){
-		this.sprite1 = game.add.sprite(0, 0, image);
-    this.sprite2 = game.add.sprite(this.sprite1.width, 0, image);
-		this.scroll = function (amt){
-			this.sprite1.x += amt;
-			this.sprite2.x += amt;
-			if(this.sprite1.x + this.sprite1.width < 0){
-				this.sprite1.x = this.sprite2.x + this.sprite2.width;
-			}
-			if(this.sprite2.x + this.sprite2.width < 0){
-				this.sprite2.x = this.sprite1.x + this.sprite1.width;
-			}
-		}
-
 }
 function create() {
-  keys = game.input.keyboard.createCursorKeys();
+	init()
 	bk = new Background('bk');
-	//bk2 = game.add.sprite(bk1.width,0,'bk');
 
 	dude = new Sprite('dude');
 	dude.resizeBy(35);
 
-  /*
-	alien1 = game.add.sprite(game.world.width,game.world.centerY,'alien1');
-  alien1.scale.setTo(0.35,0.35);
-	game.physics.arcade.enable(alien1);
-	alien1.body.velocity.x = -100;
+  diamond = new Sprite('diamond',world.width,world.centerY)
+	diamond.vx = -100;
 
-	diamond = game.add.sprite(game.world.width,Math.random() * game.world.height,'diamond');
-	game.physics.arcade.enable(diamond);
-	diamond.body.velocity.x = -200;
-
-	keys = game.input.keyboard.createCursorKeys();
 	score = 0;
-	scoreText = game.add.text(10, 10, 'Score: 0', { fontSize: '32px', fill: '#000' });
-  */
+	scoreText = new Text(10,10);
+	scoreText.text = "Score: " + score;
+
 }
 
 function update() {
   bk.scroll(-2)
   controlDude();
-  /*
-	scrollBK(2);
-	controlDude();
-	if(game.physics.arcade.overlap(dude, alien1)){
-		dude.kill();
-	}
-	if(game.physics.arcade.overlap(dude, diamond)){
-		diamond.body.x = game.world.width;
-		diamond.body.y = Math.random() * game.world.height;
+	if(dude.collidedWith(diamond)){
+		diamond.x = world.width;
+		diamond.y = world.randomY;
 		score += 100;
 		scoreText.text = "Score: " + score;
 	}
+  /*
+	if(game.physics.arcade.overlap(dude, alien1)){
+		dude.kill();
+	}
+
 	if(alien1.body.x + alien1.body.width < 0){
 		alien1.body.x = game.world.width;
 		alien1.body.y = Math.random() * game.world.height;
@@ -170,18 +89,6 @@ function controlDude(){
 			dude.vy = speed;
 	}
 }
-/*
-function scrollBK(amt){
-	bk1.x -= amt;
-	bk2.x -= amt;
-	if(bk1.x + bk1.width < 0){
-				bk1.x = bk2.x + bk2.width;
-	}
-	if(bk2.x + bk2.width < 0){
-				bk2.x = bk1.x + bk1.width;
-	}
-}
-*/
 </script>
 
 </body>
