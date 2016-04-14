@@ -32,6 +32,15 @@ function Sprite(image,x,y){
 	 		      },
 	 		      configurable: false
 	 		  });
+		 Object.defineProperty(this, "visible", {
+		 		      get: function() {
+		 		        return this.sprite.visible;
+		 		      },
+		 		      set: function(y) {
+		 		        this.sprite.visible = y;
+		 		      },
+		 		      configurable: false
+		 		  });
     Object.defineProperty(this, "vx", {
     		    get: function() {
     		      return this.sprite.body.velocity.x;
@@ -57,7 +66,16 @@ function Sprite(image,x,y){
       this.sprite.scale.setTo(amt/100,amt/100);
     }
 		this.isOffScreen =  function(side){
-			if(side.toUpperCase() == "LEFT" && this.sprite.body.x + this.sprite.width < 0){
+			if(side.toUpperCase() == "LEFT" && this.sprite.body.right < 0){
+				return true;
+			}
+			if(side.toUpperCase() == "RIGHT" && this.sprite.body.left > game.world.width){
+				return true;
+			}
+			if(side.toUpperCase() == "TOP" && this.sprite.body.top < 0){
+				return true;
+			}
+			if(side.toUpperCase() == "BOTTOM" && this.sprite.body.bottom > game.world.height){
 				return true;
 			}
 
