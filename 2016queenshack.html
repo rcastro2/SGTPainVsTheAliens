@@ -50,6 +50,15 @@ function Sprite(image,x,y){
 	 		      },
 	 		      configurable: false
 	 		  });
+	    Object.defineProperty(this, "angle", {
+	 		      get: function() {
+	 		        return this.sprite.angle;
+	 		      },
+	 		      set: function(y) {
+	 		        this.sprite.angle = y;
+	 		      },
+	 		      configurable: false
+	 		  });
     Object.defineProperty(this, "vx", {
     		    get: function() {
     		      return this.sprite.body.velocity.x;
