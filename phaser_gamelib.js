@@ -96,6 +96,13 @@ function Text(x,y){
 					configurable: false
 			});
 }
+function Sound(s){
+	this.audio = game.add.audio(s);
+	this.audio.loop = false;
+	this.play = function(loop){
+		this.audio.play();
+	}
+}
 function Background(image){
 		this.sprite1 = game.add.sprite(0, 0, image);
     this.sprite2 = game.add.sprite(this.sprite1.width, 0, image);

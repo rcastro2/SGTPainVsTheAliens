@@ -28,6 +28,7 @@ function preload() {
 	game.load.image('alien1','assets/alien1.png');
 	game.load.image('diamond','assets/diamond.png');
 	game.load.image('gameover','assets/gameover.png');
+	game.load.audio('zip','assets/blaster.wav');
 }
 function create() {
 	init()
@@ -50,6 +51,7 @@ function create() {
 	gameover = new Sprite('gameover',240,200);
 	gameover.visible = false;
 
+  zip = new Sound('zip');
 }
 
 function update() {
@@ -58,6 +60,7 @@ function update() {
 	if(dude.collidedWith(diamond)){
 		diamond.x = world.width;
 		diamond.y = world.randomY;
+		zip.play();
 		score += 100;
 		scoreText.text = "Score: " + score;
 	}
