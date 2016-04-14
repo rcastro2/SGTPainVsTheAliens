@@ -28,7 +28,11 @@ function preload() {
 	game.load.image('alien1','assets/alien1.png');
 	game.load.image('diamond','assets/diamond.png');
 	game.load.image('gameover','assets/gameover.png');
-	game.load.audio('zip','assets/blaster.wav');
+	game.load.audio('zip','assets/hitCoin_sound.ogg');
+	game.load.audio('die','assets/hit.wav');
+	game.load.audio('music','assets/background_music.ogg');
+
+
 }
 function create() {
 	init()
@@ -52,6 +56,9 @@ function create() {
 	gameover.visible = false;
 
   zip = new Sound('zip');
+	die = new Sound('die');
+	music = new Sound('music');
+	music.play();
 }
 
 function update() {
@@ -72,6 +79,7 @@ function update() {
 	if(dude.collidedWith(alien)){
 		alien.x = world.width;
 		alien.y = world.randomY;
+		die.play();
 		gameover.visible = true;
 	}
 	if(alien.isOffScreen('left')){
