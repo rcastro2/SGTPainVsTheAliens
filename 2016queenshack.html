@@ -5,6 +5,7 @@
 	<title>Phaser - Making your first game, part 3</title>
 	<script type="text/javascript" src="js/phaser.min.js"></script>
 	<script type="text/javascript" src="phaser_gamelib.js"></script>
+	<script type="text/javascript" src="gamelevels.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -12,7 +13,7 @@
         canvas{
             margin: 0 auto;
             box-shadow:5px 5px 5px grey;
-            /*cursor:none !important;*/
+            cursor:none !important;
         }
     </style>
 </head>
@@ -21,13 +22,16 @@
 <script type="text/javascript">
 
 var game = new Phaser.Game(800, 550, Phaser.AUTO, '', { preload: preload, create: create, update: update });
-var keys;
+
 function preload() {
 	game.load.image('bk','assets/bk2.png');
 	game.load.image('dude','assets/dude.png');
 	game.load.image('alien1','assets/alien1.png');
+	game.load.image('alien2','assets/alien2.gif');
+	game.load.image('alien3','assets/alien3.gif');
 	game.load.image('diamond','assets/diamond.png');
 	game.load.image('gameover','assets/gameover.png');
+
 	game.load.audio('zip','assets/hitCoin_sound.ogg');
 	game.load.audio('die','assets/hit.wav');
 	game.load.audio('music','assets/background_music.ogg');
@@ -42,6 +46,7 @@ function create() {
   diamond = new Sprite('diamond',world.width,world.randomY);
 	diamond.vx = -100;
 
+  loadAliens(0);
 	alien = new Sprite('alien1',world.width,world.randomY);
 	alien.resizeBy(35);
 	alien.vx = -120;
