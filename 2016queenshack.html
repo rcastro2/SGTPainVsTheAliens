@@ -12,7 +12,7 @@
         canvas{
             margin: 0 auto;
             box-shadow:5px 5px 5px grey;
-            cursor:none !important;
+            /*cursor:none !important;*/
         }
     </style>
 </head>
@@ -31,8 +31,6 @@ function preload() {
 	game.load.audio('zip','assets/hitCoin_sound.ogg');
 	game.load.audio('die','assets/hit.wav');
 	game.load.audio('music','assets/background_music.ogg');
-
-
 }
 function create() {
 	init()
@@ -65,26 +63,22 @@ function update() {
   bk.scroll(-2)
   controlDude();
 	if(dude.collidedWith(diamond)){
-		diamond.x = world.width;
-		diamond.y = world.randomY;
+		diamond.moveTo(world.width, world.randomY);
 		zip.play();
 		score += 100;
 		scoreText.text = "Score: " + score;
 	}
   if(diamond.isOffScreen('left')){
-		diamond.x = world.width;
-		diamond.y = world.randomY;
+    diamond.moveTo(world.width, world.randomY);
 		diamond.vx -= 50;
 	}
 	if(dude.collidedWith(alien)){
-		alien.x = world.width;
-		alien.y = world.randomY;
+		alien.moveTo(world.width, world.randomY);
 		die.play();
 		gameover.visible = true;
 	}
 	if(alien.isOffScreen('left')){
-		alien.x = world.width;
-		alien.y = world.randomY;
+		alien.moveTo(world.width, world.randomY);
 		alien.vx -= 100;
 	}
 }
@@ -107,6 +101,9 @@ function controlDude(){
 	else if (keys.down.isDown)
 	{
 			dude.vy = speed;
+	}
+	if(pointer.isDown){
+		dude.moveTo(pointer.x,pointer.y);
 	}
 }
 </script>

@@ -1,10 +1,34 @@
 function init(){
   keys = game.input.keyboard.createCursorKeys();
+	pointer = new Pointer();
   world = game.world
+}
+function Pointer(){
+	this.pointer = game.input.activePointer;
+	Object.defineProperty(this, "x", {
+				get: function() {
+					return this.pointer.position.x;
+				},
+				configurable: false
+		 });
+	Object.defineProperty(this, "y", {
+				get: function() {
+					return this.pointer.position.y;
+				},
+				configurable: false
+		});
+	Object.defineProperty(this, "isDown", {
+				get: function() {
+					return this.pointer.isDown;
+				},
+				configurable: false
+		});
+
 }
 function Sprite(image,x,y){
 		this.sprite = game.add.sprite(x || 0, y || 0, image);
     game.physics.arcade.enable(this.sprite)
+
 		Object.defineProperty(this, "x", {
 		      get: function() {
 		        return this.sprite.body.x;
@@ -65,6 +89,11 @@ function Sprite(image,x,y){
     this.resizeBy = function(amt){
       this.sprite.scale.setTo(amt/100,amt/100);
     }
+		this.moveTo = function(x,y,instant){
+				this.sprite.body.x = x - this.sprite.width/2;
+				this.sprite.body.y = y - this.sprite.height/2;
+		}
+
 		this.isOffScreen =  function(side){
 			if(side.toUpperCase() == "LEFT" && this.sprite.body.right < 0){
 				return true;
