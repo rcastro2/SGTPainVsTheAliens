@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>2016 Queens Hack - Part 3</title>
+	<script type="text/javascript" src="js/phaser.min.js"></script>
+	<script type="text/javascript" src="js/phaser_gamelib.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+        canvas{
+            margin: 0 auto;
+            box-shadow:5px 5px 5px grey;
+            cursor:none !important;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+var game = new Phaser.Game(800, 550, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+function preload() {
+	game.load.image('bk','assets/bk2.png');
+	game.load.image('hero','assets/dude.png');
+	game.load.image('diamond','assets/diamond.png');
+	game.load.image('alien','assets/alien1.png');
+	game.load.image('gameover','assets/gameover.png');
+
+	game.load.audio('zip','assets/hitCoin_sound.ogg');
+	game.load.audio('die','assets/hit.wav');
+	game.load.audio('music','assets/background_music.ogg');
+}
+function create() {
+	init()
+	bk = new Background('bk');
+	hero =  new Sprite('hero');
+	hero.resizeBy(25);
+
+	diamond = new Sprite('diamond',world.width,world.randomY);
+	diamond.vx = -150;
+
+	alien = new Sprite('alien',world.width,world.randomY);
+	alien.resizeBy(25);
+	alien.vx = -200;
+
+	score = 0;
+	scoreText = new Text(10,10);
+	scoreText.text = "Score: " + score;
+
+	health = 100
+	healthText = new Text(200,10);
+	healthText.text = "Health: " + health;
+
+  gameover = new Sprite('gameover',200,250);
+	gameover.visible = false;
+
+	zip = new Sound('zip');
+	die = new Sound('die');
+	music = new Sound('music');
+	music.play();
+}
+function update() {
+	bk.scroll(-2)
+	if (keys.right.isDown)
+	{
+			hero.vx = 100;
+	}
+	else if (keys.left.isDown)
+	{
+			hero.vx = -100;
+	}
+
+	if (keys.up.isDown)
+	{
+			hero.vy = -100;
+	}
+	else if (keys.down.isDown)
+	{
+			hero.vy = 100;
+	}
+	if(diamond.isOffScreen('left')){
+		diamond.moveTo(world.width,world.randomY);
+	}
+	if(hero.collidedWith(diamond)){
+		diamond.moveTo(world.width, world.randomY);
+		score += 100;
+		scoreText.text = "Score: " + score;
+		zip.play();
+	}
+	if(alien.isOffScreen('left')){
+		alien.moveTo(world.width,world.randomY);
+	}
+	if(hero.collidedWith(alien)){
+		alien.moveTo(world.width, world.randomY);
+		health -= 10;
+		healthText.text = "Health: " + health;
+		die.play();
+	}
+	if(health <= 0){
+		gameover.visible = true;
+	}
+}
+</script>
+</body>
+</html>
