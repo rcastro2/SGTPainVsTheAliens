@@ -163,14 +163,13 @@ function Background(image){
 
 }
 
-var loadAliens = function(level){
+var loadAliens = function(objects){
   var array = [];
   var object;
   var alien;
-  level--;
 
-  for(var index in waves[level]["objects"]){
-    object = waves[level]["objects"][index];
+  for(var index in objects){
+    object = objects[index];
     var tmp = new Sprite(object.id,-1000,-1000);
     tmp.resizeBy(25);
     var width = tmp.sprite.width;

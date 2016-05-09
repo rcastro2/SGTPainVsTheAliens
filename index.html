@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>Hero's Journey</title>
+	<title>SGT Pain Vs The Aliens</title>
 	<style type="text/css">
 			body {
 					margin: 0;
@@ -16,6 +16,8 @@
 	<script src="js/phaser.min.js"></script>
 	<script src="js/phaser_gamelib.js"></script>
 	<script src="gamelevels.js"></script>
+	<script src="boot.js"></script>
+	<script src="preload.js"></script>
 	<script src="splashscreen.js"></script>
 	<script src="gamescreen.js"></script>
 	<script src="endingscreen.js"></script>
@@ -25,10 +27,12 @@
 <script type="text/javascript">
 (function(){
 		var game = new Phaser.Game(800, 550, Phaser.AUTO, "game");
+		game.state.add("boot",boot);
+		game.state.add("preload",preload);
 		game.state.add("splashscreen",splashscreen);
 		game.state.add("gamescreen",gamescreen);
 		game.state.add("endingscreen",endingscreen);
-		game.state.start("splashscreen");
+		game.state.start("boot");
 })();
 </script>
 

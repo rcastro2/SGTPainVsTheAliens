@@ -6,17 +6,17 @@ var endingscreen = function(game){
 
 endingscreen.prototype = {
 		preload:function () {
-			this.game.load.image('bk','assets/bk3.png');
-			this.game.load.image('gameover','assets/gameover.png');
-			this.game.load.image('play','assets/play.png');
-			this.game.load.image('pointer','assets/pointer.png');
+
 		},
 		create:function () {
-			bk = this.game.add.sprite(0,0,'bk');
+			bk = this.game.add.sprite(0,0,'bk1');
 			var gameTitle = this.game.add.sprite(320,160,"gameover");
 			gameTitle.anchor.setTo(0.5,0.5);
 			var playButton = this.game.add.button(560,380,"play",this.playTheGame,this);
 			playButton.anchor.setTo(0.5,0.5);
+
+			hero = this.game.add.sprite(10,300,'hero');
+			hero.scale.setTo(0.50,0.50);
 
 			pointer = this.game.add.sprite(0,0,"pointer");
 		},
@@ -25,6 +25,6 @@ endingscreen.prototype = {
 			pointer.y = this.game.input.activePointer.position.y;
 		},
 	  playTheGame: function(){
-			this.game.state.start("gamescreen");
+			this.game.state.start("gamescreen",true,false,1);
 		}
 }

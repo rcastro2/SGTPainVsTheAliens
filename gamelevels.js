@@ -1,6 +1,7 @@
-var waves = [
+var levels = [{},
     {
       "level":1,
+      "bk":"bk1",
       "objects":[
         {"id":'alien1',"horizontal":1,"vertical":0,"scale":25},
         {"id":'alien1',"horizontal":1,"vertical":5,"scale":25},
@@ -36,6 +37,49 @@ var waves = [
         {"id":'alien1',"horizontal":70,"vertical":3,"scale":25},
 
         {"id":'alien1',"horizontal":80,"vertical":0,"scale":150},
+
+
+      ]
+
+    },
+    {
+      "level":2,
+      "bk":"bk2",
+      "objects":[
+        {"id":'alien2',"horizontal":1,"vertical":0,"scale":25},
+        {"id":'alien2',"horizontal":1,"vertical":5,"scale":25},
+        {"id":'alien2',"horizontal":3,"vertical":1,"scale":25},
+        {"id":'alien2',"horizontal":3,"vertical":4.5,"scale":25},
+        {"id":'alien2',"horizontal":5,"vertical":2,"scale":25},
+        {"id":'alien2',"horizontal":6,"vertical":0,"scale":25},
+        {"id":'alien2',"horizontal":8,"vertical":1,"scale":25},
+        {"id":'alien2',"horizontal":10,"vertical":2,"scale":25},
+        {"id":'alien2',"horizontal":12,"vertical":3,"scale":25},
+        {"id":'alien2',"horizontal":14,"vertical":4,"scale":25},
+        {"id":'alien2',"horizontal":26,"vertical":5,"scale":25},
+        {"id":'alien2',"horizontal":28,"vertical":4,"scale":25},
+        {"id":'alien2',"horizontal":30,"vertical":3,"scale":25},
+        {"id":'alien2',"horizontal":32,"vertical":2,"scale":25},
+
+        {"id":'alien2',"horizontal":38,"vertical":0,"scale":25},
+        {"id":'alien2',"horizontal":38,"vertical":5,"scale":25},
+        {"id":'alien2',"horizontal":44,"vertical":3,"scale":25},
+        {"id":'alien2',"horizontal":52,"vertical":0,"scale":25},
+        {"id":'alien2',"horizontal":52,"vertical":5,"scale":25},
+
+        {"id":'alien2',"horizontal":54,"vertical":0,"scale":25},
+        {"id":'alien2',"horizontal":54,"vertical":5,"scale":25},
+        {"id":'alien2',"horizontal":57,"vertical":0,"scale":25},
+        {"id":'alien2',"horizontal":57,"vertical":5,"scale":25},
+        {"id":'alien2',"horizontal":60,"vertical":0,"scale":25},
+        {"id":'alien2',"horizontal":60,"vertical":5,"scale":25},
+        {"id":'alien2',"horizontal":62,"vertical":3,"scale":25},
+        {"id":'alien2',"horizontal":64,"vertical":3,"scale":25},
+        {"id":'alien2',"horizontal":66,"vertical":3,"scale":25},
+        {"id":'alien2',"horizontal":68,"vertical":3,"scale":25},
+        {"id":'alien2',"horizontal":70,"vertical":3,"scale":25},
+
+        {"id":'alien2',"horizontal":80,"vertical":0,"scale":150},
 
 
       ]
